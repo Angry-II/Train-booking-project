@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Train Ticket Booking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href=".\style.css" />
+  </head>
+  <body>
+    
+     <nav>
+        <div class="navbar__left">
+          <a href="#!" class="navbar__logo">
+            <img src=".\assets\Official-logo.png" alt="logo hãng" class="logo__img">
+          </a>
+        <ul class="navbar-left__list">
+          <li>
+            <a class="navbar__booking" href="#!"><span>Đặt vé</span></a>
+          </li>
+          <li>
+            <a class="navbar__my-trip" href="#!"><span>Chuyến đi của tôi</span></a>
+          </li>
+          <li>
+            <a class="navbar__offer" href="#!"><span>Ưu đãi</span></a>
+          </li>
+          <li>
+            <a class="navbar__help" href="#!"><span>Trợ giúp</span></a>
+          </li>
+        </ul>
+        </div>
+        <ul class="navbar__right">
+          <li>
+            <a class="navbar__search" href="#!" data-tooltip="Tìm kiếm">
+              <span class="navbar__search-icon"></span>
+            </a>
+          </li>
+          <li>
+            <a class="navbar__register" href="#!"><span>Đăng nhập</span></a>
+          </li>
+        </ul>
+      <button class="navbar__toggle" aria-label="Open menu">
+       <span></span>
+       <span></span>
+       <span></span>
+      </button>
+
+    </nav>
+    <div class="mobile-menu">
+      <ul>
+        <li><a href="#!">Đặt vé</a></li>
+        <li><a href="#!">Chuyến đi của tôi</a></li>
+        <li><a href="#!">Ưu đãi</a></li>
+        <li><a href="#!">Trợ giúp</a></li>
+        <li><a href="#!">Tìm kiếm</a></li>
+        <li><a href="#!">Đăng nhập</a></li>
+      </ul>
+    </div>
+
+
+<!--Phần Header-->
+
+    <header class="header">
+    <div class="container">
+       <!--Phần hero-->
+      <section class="hero">
+        <!--Form tìm chuyến-->
+     <div class="booking-box">
+  <h3 class="booking__title">Tìm chuyến đi</h3>
+
+  <!-- TAB LIST -->
+  <div class="tab__list">
+    <button type="button" data-type="oneway">Đặt vé</button>
+    <button type="button" data-type="checkin">Check-in</button>
+    <button type="button" data-type="lookup">Tra cứu</button>
+  </div>
+  
+  
+  <!-- FORM tìm chuyến-->
+  <form class="search__form">
+    <div class="trip-type">
+      <label>
+        <input type="radio" name="trip" value="oneway" checked>
+        Một chiều
+      </label>
+      <label>
+        <input type="radio" name="trip" value="roundtrip">
+        Khứ hồi
+      </label>
+    </div>
+
+    <!-- GA ĐI -->
+    <div class="field departure-sta">
+      <label>Ga đi</label>
+      <input type="text" placeholder="Chọn ga đi">
+    </div>
+
+    <!-- GA ĐẾN -->
+    <div class="field arrival-sta">
+      <label>Ga đến</label>
+      <input type="text" placeholder="Chọn ga đến">
+    </div>
+
+    <!-- NGÀY ĐI -->
+    <div class="field leave-date">
+      <label>Ngày đi</label>
+      <input type="text" id="leaveDate" placeholder="dd/mm/yyyy">
+    </div>
+
+
+
+    <!-- NGÀY VỀ -->
+    <div class="field return-date">
+      <label>Ngày về</label>
+      <input type="text" id="returnDate" placeholder="dd/mm/yyyy">
+    </div>
+
+
+    <!-- HÀNH KHÁCH -->
+    <div class="field passengers">
+      <label>Hành khách</label>
+      <div class="passenger-control">
+        <button type="button" class="minus">−</button>
+        <input type="number" value="1" min="1" max="9" readonly>
+        <button type="button" class="plus">+</button>
+      </div>
+    </div>
+
+    <button type="submit" class="booking-form__btn">Tìm vé</button>
+  </form>
+  
+  <!-- Check in -->
+  <form class="tab-content hidden checkin">
+  <div class="field">
+    <label>Mã vé</label>
+    <input type="text" placeholder="Nhập mã vé">
+  </div>
+
+  <div class="field">
+    <label>SĐT hoặc Email</label>
+    <input type="text" placeholder="Nhập SĐT hoặc Email">
+  </div>
+
+  <button type="submit" class="booking-form__btn">Check-in</button>
+</form>
+
+<!--Tra cứu-->
+ <form class="tab-content hidden lookup">
+  <div class="field">
+    <label>Mã vé (tuỳ chọn)</label>
+    <input type="text" placeholder="Nhập mã vé">
+  </div>
+
+  <div class="field">
+    <label>Ngày tra cứu</label>
+    <input type="text" id="check-day" placeholder="dd/mm/yyyy">
+  </div>
+
+  <button type="submit" class="booking-form__btn">Tra cứu</button>
+</form>
+</div>
+</section>
+</div>
+</header>
+
+<main>
+        <div class="container">
+
+          <!--Hot trips-->
+
+    <section class="hot-trips">
+      <h2 class="section-title">Chuyến đi hot</h2>
+      <div class="trips">
+        
+        <a class="trips__card" href="#!">
+          <figure class="trips__image">
+            <img src=".\assets\hn-ho-tay.jpg" alt="Ảnh Hà Nội" class="trips__img">
+          </figure>
+          <div class="trips__overlay">
+            <div class="trips__overlay-bg"></div>
+            <div class="trips__overlay-content">
+              <h3 class="trips__overlay--heading">Sài Gòn ⟶ Hà Nội</h3>
+              <p class="trips__overlay--price">Chỉ từ 601.000đ</p>
+              <div class="trips__CTA">
+                 <span class="trips__CTA-text">Đặt ngay</span>
+                 <span class="icon" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        
+        <a class="trips__card trips__card--img-right" href="#!">
+          <figure class="trips__image">
+            <img src=".\assets\dn-cau-rong.jpg" alt="Ảnh Đà Nẵng" class="trips__img">
+          </figure>
+          <div class="trips__overlay">
+            <div class="trips__overlay-bg"></div>
+            <div class="trips__overlay-content">
+              <h3 class="trips__overlay--heading">Sài Gòn ⟶ Đà Nẵng</h3>
+              <p class="trips__overlay--price">Chỉ từ 499.000đ</p>
+              <div class="trips__CTA">
+                 <span class="trips__CTA-text">Đặt ngay</span>
+                 <span class="icon" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        
+        <a class="trips__card trips__card--img-left" href="#!">
+          <figure class="trips__image">
+            <img src=".\assets\dn-bana-hill.jpg" alt="Ảnh Đà Nẵng" class="trips__img">
+          </figure>
+          <div class="trips__overlay">
+            <div class="trips__overlay-bg"></div>
+            <div class="trips__overlay-content">
+              <h3 class="trips__overlay--heading">Hà Nội ⟶ Đà Nẵng</h3>
+              <p class="trips__overlay--price">Chỉ từ 559.000đ</p>
+              <div class="trips__CTA">
+                 <span class="trips__CTA-text">Đặt ngay</span>
+                 <span class="icon" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        
+        <a class="trips__card" href="#!">
+          <figure class="trips__image">
+            <img src=".\assets\nhatrang-thap-tram.jpg" alt="Ảnh Nha Trang" class="trips__img">
+          </figure>
+          <div class="trips__overlay">
+            <div class="trips__overlay-bg"></div>
+            <div class="trips__overlay-content">
+              <h3 class="trips__overlay--heading">Sài Gòn ⟶ Nha Trang</h3>
+              <p class="trips__overlay--price">Chỉ từ 429.000đ</p>
+              <div class="trips__CTA">
+                 <span class="trips__CTA-text">Đặt ngay</span>
+                 <span class="icon" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+       <div class="more-btn hot-btn">
+                <a href="#!" class="btn CTA__more">Xem thêm các chuyến đi khác</a>
+              </div>
+ 
+      </div>
+    </section>
+
+		
+<!--Combos-->
+          <section class="promotions-section">
+          <h2 class="section-title"> Combo Du lịch tiết kiệm </h2>
+            <div class="promotions">
+
+              <div class="promo-card promo-card-sg">
+                <figure class="promo-card__image">
+                  <img src=".\assets\sg-img.jpg" alt="Ảnh Sài Gòn" class="promo-card__img">
+              
+                  <div class="promo-card__overlay">
+                    <div class="promo-card__meta">
+                      <span class="promo-card__location">Tp. Hồ Chí Minh</span>
+                      <span class="promo-card__price">Từ 1.690.000đ</span>
+                    </div>
+              
+                    <div class="promo-card__actions">
+                      <a href="#!" class="btn btn-primary">Đặt ngay</a> 
+                      <a href="#!" class="btn btn-link">Tìm hiểu thêm</a>
+                    </div>
+                  </div>
+                </figure>
+              </div>
+
+             <div class="promo-card promo-card-sg">
+                <figure class="promo-card__image">
+                  <img src=".\assets\hn-img.jpg" alt="Ảnh Hà Nội" class="promo-card__img">
+              
+                  <div class="promo-card__overlay">
+                    <div class="promo-card__meta">
+                      <span class="promo-card__location">Tp. Hà Nội</span>
+                      <span class="promo-card__price">Từ 1.590.000đ</span>
+                    </div>
+              
+                    <div class="promo-card__actions">
+                      <a href="#!" class="btn btn-primary">Đặt ngay</a> 
+                      <a href="#!" class="btn btn-link">Tìm hiểu thêm</a>
+                    </div>
+                  </div>
+                </figure>
+              </div>
+
+             <div class="promo-card promo-card-sg">
+                <figure class="promo-card__image">
+                  <img src=".\assets\dn-img.jpg" alt="Ảnh Đà Nẵng" class="promo-card__img">
+              
+                  <div class="promo-card__overlay">
+                    <div class="promo-card__meta">
+                      <span class="promo-card__location">Tp. Đà Nẵng</span>
+                      <span class="promo-card__price">Từ 1.490.000đ</span>
+                    </div>
+              
+                    <div class="promo-card__actions">
+                      <a href="#!" class="btn btn-primary">Đặt ngay</a> 
+                      <a href="#!" class="btn btn-link">Tìm hiểu thêm</a>
+                    </div>
+                  </div>
+                </figure>
+              </div>
+
+              <div class="more-btn">
+                <a href="#!" class="btn CTA__more">Xem thêm ưu đãi</a>
+              </div>
+           </div>
+          </section>
+
+<!--Why choose us-->
+ 	<section class="Why-chose-us">
+        <h2 class="section__title wcu__main-tittle">Đi tàu chưa bao giờ dễ đến thế</h2>
+        <div class="wcu__card-grid">
+          
+          <div class="wcu__fast-and-convenient wcu__card">
+            <i class="fa-regular fa-clock wcu__icon"></i>
+            <h2 class="wcu__title fac__tittle">Đặt vé nhanh & tiện lợi</h2>
+            <p class="wcu__content fac__content">Đặt vé tàu chỉ trong vài phút với giao diện đơn giản, thao tác mượt mà, giúp bạn chủ động lựa chọn chuyến đi phù hợp mà không cần xếp hàng tại ga.</p>
+          </div>
+          
+          <div class="wcu__eticket wcu__card">
+            <i class="fa-solid fa-ticket wcu__icon"></i>
+            <h2 class="wcu__title etick__tittle">Vé điện tử tiện lợi</h2>
+            <p class="wcu__content etick__content">Sau khi thanh toán, vé điện tử được gửi ngay qua email hoặc SMS, giúp bạn dễ dàng lưu trữ, tra cứu và sử dụng khi lên tàu mà không cần in vé giấy.</p>
+          </div>
+          
+          <div class="wcu__support wcu__card">
+            <i class="fa-solid fa-headset wcu__icon"></i>
+            <h2 class="wcu__title support__tittle">Hỗ trợ tận tâm</h2>
+            <p class="wcu__content support__content">Đội ngũ hỗ trợ khách hàng luôn sẵn sàng đồng hành, giải đáp thắc mắc và xử lý nhanh các vấn đề phát sinh để bạn yên tâm trong suốt hành trình.</p>
+          </div>
+        </div>
+      </section>
+  
+      <section class="FAQ">
+  <h2 class="section-title FAQ-title">Câu hỏi thường gặp</h2>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Vé tàu có đổi hoặc hoàn được không?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Vé tàu có thể đổi hoặc hoàn theo quy định của từng loại vé và thời gian đổi/trả. 
+          Phí đổi trả sẽ được thông báo rõ trước khi xác nhận.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Sau khi đặt vé bao lâu thì nhận được vé?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Sau khi thanh toán thành công, vé điện tử sẽ được gửi ngay qua email hoặc SMS trong vài phút.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Có thể thanh toán bằng những hình thức nào?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Hỗ trợ thanh toán qua thẻ ATM, thẻ quốc tế, ví điện tử và chuyển khoản ngân hàng.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Trẻ em đi tàu có cần mua vé riêng không?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Trẻ em từ 6 tuổi trở lên cần mua vé riêng. Trẻ nhỏ có thể được miễn hoặc giảm giá theo quy định.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Nếu lỡ chuyến tàu thì xử lý thế nào?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Trong trường hợp lỡ chuyến, bạn nên liên hệ bộ phận hỗ trợ sớm nhất để được hướng dẫn đổi hoặc hoàn vé.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Tôi có thể tra cứu vé đã đặt ở đâu?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Bạn có thể tra cứu vé tại mục “Chuyến đi của tôi” bằng mã đặt vé hoặc thông tin cá nhân.
+        </p>
+      </div>
+    </div>
+
+    <a class="more-question" href="#!">Xem thêm câu hỏi thường gặp</a>
+
+  </div>
+</section>
+
+        </div>
+      </main>
+    
+<footer class="footer">
+  <div class="container">
+  <div class="logo-img">
+      <figure class="logo__img">
+        <img class="footer__logo" src=".\assets\Official-logo.png" alt="logo velox">
+      </figure>
+    </div>
+   <div class="footer-container">
+    <div class="footer-col">
+      <h3>About</h3>
+      <ul>
+        <li><a href="#!">Tổng quan</a></li>
+        <li><a href="#!">Về VeloxRail</a></li>
+        <li><a href="#!">Tuyển dụng</a></li>
+        <li><a href="#!">Báo chí</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3>Khám phá</h3>
+      <ul>
+        <li><a href="#!">Trang chủ</a></li>
+        <li><a href="#!">Đặt vé tàu</a></li>
+        <li><a href="#!">Lịch trình tàu</a></li>
+        <li><a href="#!">Giá vé</a></li>
+        <li><a href="#!">Khuyến mãi</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3>Hỗ trợ</h3>
+      <ul>
+        <li><a href="#!">Trung tâm hỗ trợ</a></li>
+        <li><a href="#!">Hướng dẫn đặt vé</a></li>
+        <li><a href="#!">Đổi / hoàn vé</a></li>
+        <li><a href="#!">Hướng dẫn thanh toán</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3>Liên hệ</h3>
+      <p><i class="fa-solid fa-phone"></i> 1900 8888</p>
+      <p><i class="fa-solid fa-envelope"></i> support@veloxrail.vn</p>
+      <p><i class="fa-solid fa-location-dot"></i> Hà Nội, Việt Nam</p>
+
+      <div class="social">
+        <a href="#!" aria-label="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="#!" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="#!" aria-label="X">
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+        <a href="#!" aria-label="YouTube">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h3>Pháp lý</h3>
+      <ul>
+        <li><a href="#!">Điều khoản sử dụng</a></li>
+        <li><a href="#!">Chính sách bảo mật</a></li>
+        <li><a href="#!">Chính sách thanh toán</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 VeloxRail. Mọi quyền được bảo lưu.
+  </div>
+</footer>
+    
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>    
+<script src="script.js"></script>
+  </body>
+</html>
